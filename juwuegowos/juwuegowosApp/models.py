@@ -11,7 +11,7 @@ class User(AbstractUser):
 
 class Game(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField()
+    description = models.CharField(max_length=51000)
     date = models.DateField(default=timezone.now().strftime("%d/%m/%Y"))
     nsfw = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="images/thumbnails")
@@ -19,7 +19,7 @@ class Game(models.Model):
 class Comment(models.Model):
     user_id = ForeignKey(User, on_delete=models.CASCADE)
     game_id = ForeignKey(Game, on_delete=models.CASCADE)
-    comment = models.CharField()
+    comment = models.CharField(max_length=51000)
     date = models.DateTimeField(timezone.now().strftime("%d/%m/%Y - %H:%M"))
 
 class Tag(models.Model):
@@ -27,16 +27,16 @@ class Tag(models.Model):
 
 class GameTag(models.Model):
     game_id = ForeignKey(Game, on_delete=models.CASCADE)
-    tag = ForeignKey(Tag)
+    tag = ForeignKey(Tag, on_delete=models.CASCADE)
 
 class GameDeveloper(models.Model):
-    user_id = ForeignKey(User)
-    game_id = ForeignKey(Game)
+    user_id = ForeignKey(User, on_delete=models.CASCADE)
+    game_id = ForeignKey(Game, on_delete=models.CASCADE)
 
 class SocialMedia(models.Model):
-    name = CharField()
+    name = CharField(max_length=32)
 
 class UserSocialMedia(models.Model):
-    user_id = ForeignKey(User)
-    social_media = ForeignKey(SocialMedia)
-    username = CharField()
+    user_id = ForeignKey(User, on_delete=models.CASCADE)
+    social_media = ForeignKey(SocialMedia, on_delete=models.CASCADE)
+    username = CharField(max_length=255)
