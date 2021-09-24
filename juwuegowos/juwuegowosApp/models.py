@@ -5,10 +5,10 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from taggit.managers import TaggableManager
 
-# Create your models here.
 
 class User(AbstractUser):
     picture = models.ImageField(upload_to="images/profilePictures")
+
 
 class Game(models.Model):
     name = models.CharField(max_length=255)
@@ -19,14 +19,17 @@ class Game(models.Model):
     thumbnail = models.ImageField(upload_to="images/thumbnails")
     tags = TaggableManager()
 
+
 class Comment(models.Model):
     user_id = ForeignKey(User, on_delete=models.CASCADE)
     game_id = ForeignKey(Game, on_delete=models.CASCADE)
     comment = models.CharField(max_length=51000)
     date = models.DateTimeField(timezone.now().strftime("%d/%m/%Y - %H:%M"))
 
+
 class SocialMedia(models.Model):
     name = CharField(max_length=32)
+
 
 class UserSocialMedia(models.Model):
     user_id = ForeignKey(User, on_delete=models.CASCADE)
