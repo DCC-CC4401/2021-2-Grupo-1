@@ -1,6 +1,9 @@
 from django.http import HttpResponseRedirect
 from juwuegowosApp.models import User       
 
+def testView(request):
+    return render(request, "test.html")
+
 def home(request):  # the index view
     return render(request, "juwuegowosApp/index.html")
 
@@ -39,5 +42,4 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/home')
-
 
