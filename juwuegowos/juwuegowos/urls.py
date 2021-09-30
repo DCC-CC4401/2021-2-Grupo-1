@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path
 
 from juwuegowosApp.views import testView
+from juwuegowosApp.urls import urlpatterns as urlsApp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("test/", testView)
-]
+] + urlsApp
