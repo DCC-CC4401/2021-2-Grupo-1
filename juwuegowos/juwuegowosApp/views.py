@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
-from juwuegowosApp.models import User       
+from juwuegowosApp.models import User
+from django.shortcuts import render
 
 def testView(request):
     return render(request, "test.html")
