@@ -19,7 +19,7 @@ def subir_juegos(request):
         #game.save() #guarda la tupla en la tabla game para que se cree la primary key
         #game.tags.add(game_tags) #ahora es posible editar los tags asi que se añaden
         #game.save() #se vuelve a guardar con los tags añadidos
-        msg = "heh %s" %is_nsfw
+        msg = "heh %s" %game_thmbnl
         return HttpResponse(msg) #por ahora redirige a un msje, eventualmente redirigira a /mis juegos/
     else:    
         return render(request, 'template_subirJuegos/subir_juegos.html')    
