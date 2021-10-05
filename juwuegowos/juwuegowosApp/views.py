@@ -31,7 +31,7 @@ def register_user(request):
      user = User.objects.create_user(username=nombre, password=contraseña, email=mail, img=imagen)
 
      #Redireccionar la página /home
-     return HttpResponseRedirect('/home')
+     return HttpResponseRedirect('/')
 
 
 
@@ -44,14 +44,14 @@ def login_user(request):
         usuario = authenticate(username=username,password=contraseña)
         if usuario is not None:
             login(request,usuario)
-            return HttpResponseRedirect('/home')
+            return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/register')
 
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('/home')
+    return HttpResponseRedirect('/')
 
 
 def game(request, game_id):
@@ -62,6 +62,7 @@ def game(request, game_id):
     return render(request, f"games/{game_id}/index.html")
     #return HttpResponse(open(f"static/games/{game_id}/index.html").read())
     #return render(request, "juwuegowosApp/game_page.html")
+
 
 def play_game(request, game_id):
     #return HttpResponse()
