@@ -22,6 +22,38 @@
     border-radius: 0 0 4px 4px;
 }
 
+.game-thumbnail {
+    height: 225px;
+    width: 100%;
+    display: block;
+}
+
+/* Centered text */
+.nsfw-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container-over {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.nsfw {
+    filter: blur(16px);
+}
+
+.container-over:hover .nsfw {
+    filter: blur(0px);
+}
+
+.container-over:hover .nsfw-text {
+    visibility: hidden;
+}
+
 .container {
     width: 100%;
     padding-right: 15px;

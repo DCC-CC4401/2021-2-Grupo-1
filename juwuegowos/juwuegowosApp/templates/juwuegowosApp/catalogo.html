@@ -6,16 +6,30 @@ Catalogo
 {% endblock %}
 
 {% block content %}
-
     <div class="container">
     <h3>Latest:</h3>
     <div class="row">
     {% for game in games %}
         <div class="col-md-4">
         <div class = "card" style="width: 18rem;">
-            <img class="card-img-top" src={{ game.thumbnail }} style="height: 225px; width: 100%; display: block;">
+
+            {% if game.nsfw %}
+                <div class="container-over">
+                <img class="card-img-top game-thumbnail nsfw" src={{ game.thumbnail }}>
+                <div class="nsfw-text">Hover to see thumbnail</div>
+                </div>
+            {% else %}
+                <img class="card-img-top game-thumbnail" src={{ game.thumbnail }}>
+            {% endif %}
+
             <div class="card-body">
-                <h5 class="card-title">{{ game.name }}</h5>
+                <h5 class="card-title">
+                    {{ game.name }}
+                    {% if game.nsfw %}
+                        <span class="badge bg-danger">NSFW</span>
+                    {% endif %}
+                </h5>
+
                 <p class="card-text">{{ game.description }}</p>
                 <a href="jugar/{{ game.id }}" class="btn btn-primary">Jugar</a>
             </div>
