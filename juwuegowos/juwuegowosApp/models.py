@@ -20,7 +20,6 @@ class Game(models.Model):
     tags = TaggableManager()
 
 
-
 class Comment(models.Model):
     user_id = ForeignKey(User, on_delete=models.CASCADE)
     game_id = ForeignKey(Game, on_delete=models.CASCADE)
