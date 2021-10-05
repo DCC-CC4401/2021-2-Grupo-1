@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Application definition
 
@@ -57,7 +58,8 @@ ROOT_URLCONF = 'juwuegowos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [os.path.join(BASE_DIR, "templates"),
+                BASE_DIR / "static"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +76,6 @@ WSGI_APPLICATION = 'juwuegowos.wsgi.application'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "juwuegowosApp/images"
 ]
 
 # Database

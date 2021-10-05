@@ -10,3 +10,10 @@
     font-size: 48px;
     vertical-align: middle;
 }
+
+.game-container {
+    margin-top: 32px;
+    border-color: darkgray;
+    /*border-width: 16px;*/
+    border: 16px;
+}
