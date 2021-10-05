@@ -4,6 +4,7 @@ from . import views
 from juwuegowos.settings import STATIC_URL
 
 urlpatterns = [
+    path("", views.catalog, name="catalogo"),
     path('home', views.testView, name='home'),
     path('register', views.register_user, name='register_user'),
     path('login',views.login_user, name='login'),

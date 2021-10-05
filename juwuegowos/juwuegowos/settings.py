@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'juwuegowos.wsgi.application'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    BASE_DIR / "juwuegowosApp/images"
 ]
 
 # Database
