@@ -15,8 +15,6 @@
 </head>
 
 <body>
-
-
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<div>
@@ -41,9 +39,20 @@
 					</li>
 				</ul>
 
-				<ul class="d-flex navbar-nav navbar-dark">
+				<ul class="d-flex navbar-nav navbar-dark align-items-center">
 
                     {% if user.is_authenticated %}
+
+                        <li class="nav-item" style="margin-right:15px;">
+                            <form method="get" action="/upload-game" style="padding:7px;">
+                                <button type="button" class="btn btn-secondary" >
+                                    <span class="material-icons md-36">
+                                        upload
+                                    </span>
+                                </button>
+                            </form>
+                        </li>
+
 
                         <li class="navbar-text">
                             <h3>
@@ -52,7 +61,7 @@
                         </li>
 
                         <li class="nav-item" style="margin-left: 1rem">
-                            <img class="rounded mx-auto d-inline-block align-top" src="{% static 'images/icon.png' %}" width="48" height="48">
+                            <img class="rounded justify-content-center" src="{% static 'images/icon.png' %}" width="48" height="48">
                         </li>
 
                          <li class="nav-item">
