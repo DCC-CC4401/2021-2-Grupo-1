@@ -10,3 +10,23 @@
     font-size: 48px;
     vertical-align: middle;
 }
+
+.box-element {
+    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.product {
+    border-radius: 0 0 4px 4px;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
+}
