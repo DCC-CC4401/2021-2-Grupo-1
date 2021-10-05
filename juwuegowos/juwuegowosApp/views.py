@@ -54,21 +54,9 @@ def logout_user(request):
     return HttpResponseRedirect('/')
 
 
-def game(request, game_id):
-    #if request.method == "GET":
-    #    return
-    #return HttpResponse()
-    # juwuegowos\juwuegowosApp\games\1\index.html
-    return render(request, f"games/{game_id}/index.html")
-    #return HttpResponse(open(f"static/games/{game_id}/index.html").read())
-    #return render(request, "juwuegowosApp/game_page.html")
-
-
 def play_game(request, game_id):
-    #return HttpResponse()
-    # juwuegowos\juwuegowosApp\games\1\index.html
-    #return HttpResponse(open(f"juwuegowosApp/static/games/{game_id}/index.html").read())
-    return render(request, "juwuegowosApp/game_page.html")
+    game = Game.objects.filter(id=game_id)[0]
+    return render(request, "juwuegowosApp/game_page.html", {"game": game})
 
 
 def catalog(request):

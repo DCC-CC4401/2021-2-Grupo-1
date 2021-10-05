@@ -11,5 +11,4 @@ urlpatterns = [
     path('logout',views.logout_user, name='logout'),
     path("catalogo", views.testView, name="catalogo"),
     path("jugar/<int:game_id>/", views.play_game, name="jugar"),
-    path("juego/<int:game_id>/", views.game, name="juego"),
 ]
