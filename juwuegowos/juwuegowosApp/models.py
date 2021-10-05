@@ -14,7 +14,7 @@ class Game(models.Model):
     name = models.CharField(max_length=255)
     developer = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=51000)
-    date = models.DateField(default=timezone.now().strftime("%d/%m/%Y"))
+    date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) #cambie el formato porque tiraba error
     nsfw = models.BooleanField(default=False)
     thumbnail = models.ImageField(upload_to="images/thumbnails")
     tags = TaggableManager()

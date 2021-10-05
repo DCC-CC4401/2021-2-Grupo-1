@@ -18,8 +18,9 @@ from django.urls import path
 
 from juwuegowosApp.views import testView
 from juwuegowosApp.urls import urlpatterns as urlsApp
+from subirJuegos.urls import urlpatterns as urlUploadGames
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("test/", testView)
-] + urlsApp
+] + urlsApp + urlUploadGames
