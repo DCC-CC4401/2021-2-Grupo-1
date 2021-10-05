@@ -1,12 +1,20 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from juwuegowosApp.models import User
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
+
+from juwuegowosApp.models import User, Game
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login,logout
+
 
 def testView(request):
     return render(request, "test.html")
 
+
 def home(request):  # the index view
     return render(request, "juwuegowosApp/index.html")
+
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
@@ -26,7 +34,8 @@ def register_user(request):
      #Redireccionar la página /home
      return HttpResponseRedirect('/home')
 
-from django.contrib.auth import authenticate, login,logout
+
+
 def login_user(request):
     if request.method == 'GET':
         return render(request,"juwuegowosApp/login.html")
@@ -40,7 +49,12 @@ def login_user(request):
         else:
             return HttpResponseRedirect('/register')
 
+
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/home')
 
+
+def catalog(request):
+    games = Game.objects.all()
+    return render(request, "juwuegowosApp/catalogo.html", {"games": games})
