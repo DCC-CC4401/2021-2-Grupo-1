@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from juwuegowosApp.models import Game
 
 # Create your views here.
@@ -9,7 +9,7 @@ def subir_juegos(request):
         game_name = request.POST["game-name"]
         game_desc = request.POST["game-desc"]
         game_tags = request.POST["game-tags"]
-        game_url = request.POST.get("game-files",False)
+        #game_url = request.POST.get("game-files",False)
         game_thmbnl = request.POST["game-img"]
         is_nsfw = request.POST.get("nsfw", False)=="on"
         dev = request.user
@@ -20,7 +20,7 @@ def subir_juegos(request):
         game.save() #guarda la tupla en la tabla game para que se cree la primary key
         game.tags.add(game_tags) #ahora es posible editar los tags asi que se añaden
         game.save() #se vuelve a guardar con los tags añadidos
-        return HttpResponse("/") #por ahora redirige a un msje, eventualmente redirigira a /mis juegos/
+        return HttpResponseRedirect("/") #por ahora redirige a un msje, eventualmente redirigira a /mis juegos/
     else:    
         return render(request, 'template_subirJuegos/subir_juegos.html')    
     

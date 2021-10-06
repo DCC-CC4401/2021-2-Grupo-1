@@ -7,7 +7,7 @@ Subir juegos
 {% block content %}
     <div class="container">
         <h1>Subir Juego</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="game-name" class="form-label">
