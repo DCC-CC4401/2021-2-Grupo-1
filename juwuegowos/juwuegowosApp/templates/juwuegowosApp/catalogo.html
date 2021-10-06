@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}
 Catálogo
@@ -20,7 +19,7 @@ Catálogo
                     </div>
                 {% else %}
                     <div>
-                        <img class="card-img-top game-thumbnail" src={{ game.thumbnail }}>
+                        <img class="card-img-top game-thumbnail" src="media/{{ game.thumbnail }}">
                     </div>
                 {% endif %}
 

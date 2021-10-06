@@ -7,7 +7,7 @@ from taggit.managers import TaggableManager
 
 
 class User(AbstractUser):
-    picture = models.ImageField(upload_to="static/images/profilePictures")
+    picture = models.ImageField(upload_to="images/profilePictures")
 
 
 class Game(models.Model):
@@ -16,7 +16,7 @@ class Game(models.Model):
     description = models.CharField(max_length=51000)
     date = models.DateField(default=timezone.now().strftime("%Y-%m-%d")) #cambie el formato porque tiraba error
     nsfw = models.BooleanField(default=False)
-    thumbnail = models.ImageField(upload_to="static/images/thumbnails")
+    thumbnail = models.ImageField(upload_to="images/thumbnails")
     tags = TaggableManager()
 
 
