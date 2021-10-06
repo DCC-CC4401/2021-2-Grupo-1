@@ -13,10 +13,8 @@
 
 
 .game-container {
-    margin-top: 5%;
-    border-color: darkgray;
     /*border-width: 16px;*/
-    border: 16px;
+    border: 16px darkgray;
 }
 
 .box-element {
@@ -101,6 +99,7 @@
 }
 
 .main-page {
+    margin-top: 5%;
     margin-bottom: 10%;
 }
 body {
