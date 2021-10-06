@@ -7,7 +7,7 @@ from taggit.managers import TaggableManager
 
 
 class User(AbstractUser):
-    picture = models.ImageField(upload_to="images/profilePictures")
+    picture = models.ImageField(upload_to="static/images/profilePictures")
 
 
 class Game(models.Model):
