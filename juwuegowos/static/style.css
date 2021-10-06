@@ -74,3 +74,27 @@
 .btn-primary {
     margin-left: 10px;
 }
+
+.description-container {
+    background-color: #b776df;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+.comment {
+    background-color: #b776df;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+.comment.comment-content h5 {
+    font-size: 24px;
+}
+
+.comment.comment-pfp {
+    display: inline-block;
+}
+
+.main-page {
+    margin-bottom: 10%;
+}
