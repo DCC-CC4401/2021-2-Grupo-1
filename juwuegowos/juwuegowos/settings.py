@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "juwuegowosApp",
+    "subirJuegos",
     "taggit",
 ]
 
@@ -76,7 +77,6 @@ WSGI_APPLICATION = 'juwuegowos.wsgi.application'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "juwuegowosApp/images"
 ]
 
 # Database
