@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-Catalogo
+Catálogo
 {% endblock %}
 
 {% block content %}
     <div class="container">
-    <h3 class="text-white">Latest:</h3>
+    <h3 class="text-white">Novedades:</h3>
     <div class="row">
     {% for game in games %}
         <div class="col-md-4">
@@ -16,7 +16,7 @@ Catalogo
                 {% if game.nsfw %}
                     <div class="container-over">
                         <img class="card-img-top game-thumbnail nsfw" src={{ game.thumbnail }}>
-                        <div class="nsfw-text">Hover to see thumbnail</div>
+                        <div class="nsfw-text">Poner cursor encima para ver</div>
                     </div>
                 {% else %}
                     <div>
@@ -28,7 +28,7 @@ Catalogo
                     <h5 class="card-title">
                         {{ game.name }}
                         {% if game.nsfw %}
-                            <span class="badge bg-danger">NSFW</span>
+                            <span class="badge bg-danger">18+</span>
                         {% endif %}
                     </h5>
 

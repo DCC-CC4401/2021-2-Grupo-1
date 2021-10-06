@@ -46,6 +46,7 @@
 .game-card {
     width: 20rem;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Centered text */
