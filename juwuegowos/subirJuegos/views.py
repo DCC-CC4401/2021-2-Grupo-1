@@ -9,7 +9,7 @@ def subir_juegos(request):
         game_name = request.POST["game-name"]
         game_desc = request.POST["game-desc"]
         game_tags = request.POST["game-tags"]
-        #game_url = request.POST.get("game-files",False)
+        game_files = request.FILES.getlist("game-files")
         game_thmbnl = request.FILES['game-img']
         is_nsfw = request.POST.get("nsfw", False)=="on"
         dev = request.user
@@ -18,6 +18,7 @@ def subir_juegos(request):
         game.save() 
         game.tags.add(game_tags) 
         game.save() 
+        print(game_files)
         return HttpResponseRedirect("/") 
     else:    
         return render(request, 'template_subirJuegos/subir_juegos.html')    
