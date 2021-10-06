@@ -7,7 +7,7 @@ Subir juegos
 {% block content %}
     <div class="container">
         <h1>Subir Juego</h1>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="game-name" class="form-label">
@@ -28,7 +28,7 @@ Subir juegos
             </div>
             <div class="form-group">
                 <label for="game-files" class="form-label">Archivos del juego</label>
-                <input class="form-control" type="file" id="game-files" multiple required>
+                <input class="form-control" type="file" id="game-files" name="game-files" multiple required>
             </div>
             <div class="form-group">
                 <label for="game-img" class="form-label">Imagen Juego</label>
