@@ -24,14 +24,14 @@ def register_user(request):
      nombre = request.POST['nombre']
      contraseña = request.POST['contraseña']
      mail = request.POST['mail']
-     imagen = request.POST['imagen']
+     imagen = request.POST['img-usuario']
 
 
      #Crear el nuevo usuario
-     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, img=imagen)
+     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, picture=imagen)
 
      #Redireccionar la página /home
-     return HttpResponseRedirect('/')
+     return HttpResponseRedirect('/login')
 
 
 
