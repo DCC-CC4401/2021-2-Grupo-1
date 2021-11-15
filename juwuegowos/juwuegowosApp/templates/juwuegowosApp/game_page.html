@@ -9,7 +9,7 @@ Jugar
 <div class="container game-container">
     <h1>{{ game.name }}</h1>
     <!--<iframe src="http://v6p9d9t4.ssl.hwcdn.net/html/4565765/index.html" height="600" width="1024"></iframe> -->
-    <iframe src="/static/games/{{ game.id }}/index.html" height="720" width="1280"></iframe>
+    <iframe src="/media/games/{{ game.id }}/index.html" height="720" width="1280"></iframe>
     <div class="container description-container">
         <p>{{ game.description }}</p>
     </div>
@@ -18,7 +18,7 @@ Jugar
         <div class="container comment">
             <div class="row">
                 <div class="col-md-1">
-                    <img class="rounded justify-content-center" src="{% static 'images/icon.png' %}" width="64" height="64">
+                    <img class="rounded justify-content-center" src="/media/images/icon.png" width="64" height="64">
                 </div>
                 <div class="col-md-11 comment-content">
                     <h5>El gueimer yeison - 5/10/2021 - 22:00</h5>
