@@ -14,12 +14,12 @@ Catálogo
 
                 {% if game.nsfw %}
                     <div class="container-over">
-                        <img class="card-img-top game-thumbnail nsfw" src={{ game.thumbnail }}>
+                        <img class="card-img-top game-thumbnail nsfw" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
                         <div class="nsfw-text">Poner cursor encima para ver</div>
                     </div>
                 {% else %}
                     <div>
-                        <img class="card-img-top game-thumbnail" src="media/{{ game.thumbnail }}">
+                        <img class="card-img-top game-thumbnail" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
                     </div>
                 {% endif %}
 

@@ -16,7 +16,7 @@ def subir_juegos(request):
         is_nsfw = request.POST.get("nsfw", False)=="on"
         dev = request.user
         #falta agregar los game_files, no se donde iria eso.
-        game = Game(name=game_name, description=game_desc,thumbnail=game_thmbnl, nsfw=is_nsfw, developer=dev)
+        game = Game(name=game_name, description=game_desc, nsfw=is_nsfw, developer=dev)
         game.save() 
         game.tags.add(game_tags) 
         game.save() 
@@ -28,12 +28,18 @@ def subir_juegos(request):
         file_path = f"games/{game.id}/{game_files.name}"
         mkdir(f"media/games/{game.id}")
         filename = fs.save(file_path, game_files)
-        upload_gamefiles_to = fs.url(filename)
+        #upload_gamefiles_to = fs.url(filename)
 
         with zipfile.ZipFile("media/" + file_path) as file:
             for fname in file.namelist():
                 file.extract(fname, f"media/games/{game.id}")
         remove("media/" + file_path)
+
+
+        image_file_path = f"images/games/{game.id}/thumbnail.{game_thmbnl.name.split('.')[-1]}"
+        mkdir(f"media/images/games/{game.id}")
+        fs.save(image_file_path, game_thmbnl)
+
 
         return HttpResponseRedirect("/") 
     else:    
