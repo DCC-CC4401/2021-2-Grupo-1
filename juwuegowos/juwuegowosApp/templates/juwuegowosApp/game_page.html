@@ -15,16 +15,16 @@ Jugar
     </div>
     <div class="container">
         <h3>Comentarios:</h3>
-        <div class="container comment">
-            <div class="row">
-                <div class="col-md-1">
-                    <img class="rounded justify-content-center" src="/media/images/icon.png" width="64" height="64">
-                </div>
-                <div class="col-md-11 comment-content">
-                    <h5>El gueimer yeison - 5/10/2021 - 22:00</h5>
-                    <p>Juego qlo weno hmno.</p>
-                </div>
-            </div>
+        <div class="container">
+            <form onsubmit="return postComment();">
+                <!--<label for="new-comment">A</label>-->
+                <!--<input type="text" name="new-comment">-->
+                <textarea cols="100" rows="1" name="comment" id="comment-box" placeholder="Escribe un comentario"></textarea>
+                <button type="button" onclick="postComment();">Publicar</button>
+            </form>
+        </div>
+        <div class="container" id="comment-section" onload="loadComments();">
+
         </div>
     </div>
     

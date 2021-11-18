@@ -2,9 +2,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
-from juwuegowosApp.models import User, Game
+from juwuegowosApp.models import User, Game, Comment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
+from django.core.files.storage import FileSystemStorage
 
 
 def testView(request):
@@ -17,21 +18,25 @@ def home(request):  # the index view
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
-     return render(request, "juwuegowosApp/register_user.html") #Mostrar el template
+        return render(request, "juwuegowosApp/register_user.html") #Mostrar el template
 
     elif request.method == 'POST': #Si estamos recibiendo el form de registro
-     #Tomar los elementos del formulario que vienen en request.POST
-     nombre = request.POST['nombre']
-     contraseña = request.POST['contraseña']
-     mail = request.POST['mail']
-     imagen = request.POST['img-usuario']
+        #Tomar los elementos del formulario que vienen en request.POST
+        nombre = request.POST['nombre']
+        contraseña = request.POST['contraseña']
+        mail = request.POST['mail']
+        imagen = request.FILES['img-usuario']
 
 
-     #Crear el nuevo usuario
-     user = User.objects.create_user(username=nombre, password=contraseña, email=mail, picture=imagen)
+        #Crear el nuevo usuario
+        user = User.objects.create_user(username=nombre, password=contraseña, email=mail)
+        #imagen = request.FILES['img-usuario']
+        fs = FileSystemStorage()
+        image_file_path = f"images/profilePictures/{user.id}.png"
+        fs.save(image_file_path, imagen)
 
-     #Redireccionar la página /home
-     return HttpResponseRedirect('/login')
+        #Redireccionar la página /home
+        return HttpResponseRedirect('/login')
 
 
 
@@ -62,3 +67,15 @@ def play_game(request, game_id):
 def catalog(request):
     games = Game.objects.all()
     return render(request, "juwuegowosApp/catalogo.html", {"games": games})
+
+
+def game_comments(request, game_id):
+    if request.method == "GET":
+        comments = Comment.objects.filter(game_id=game_id)
+        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
+    elif request.method == "POST":
+        comment = request.POST["comment"]
+        new_comment = Comment(comment=comment, game_id=game_id, user_id=0) #obtener la id del usuario
+        new_comment.save()
+        comments = Comment.objects.filter(game_id=game_id)
+        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})

@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/malware.js"></script>
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                         </li>
 
                         <li class="nav-item" style="margin-left: 1rem">
-                            <img class="rounded justify-content-center" src="/media/images/profilePictures/icon.png" width="48" height="48">
+                            <img class="rounded justify-content-center" src="/media/images/profilePictures/{{ user.id }}.png" width="48" height="48">
                         </li>
 
                          <li class="nav-item">
@@ -72,12 +73,12 @@
                     {% else %}
                         <li class="nav-item">
                             <form method="get" action="/login">
-                                <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                                <button id="boton-iniciar-sesion" class="btn btn-primary" type="submit">Iniciar Sesión</button>
                             </form>
                         </li>
                         <li class="nav-item">
                             <form method="get" action="/register">
-                                <button class="btn btn-primary" type="submit">Registrarse</button>
+                                <button id="boton-registrarse" class="btn btn-primary" type="submit">Registrarse</button>
                             </form>
                         </li>
                     {% endif %}

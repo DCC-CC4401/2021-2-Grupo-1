@@ -1,0 +1,16 @@
+{% load static %}
+
+
+{% for comment in comments %}
+<div class="container comment">
+    <div class="row">
+        <div class="col-md-1">
+            <img class="rounded justify-content-center" src="/media/images/profilePictures/{{ comment.user_id.id }}.png" width="64" height="64">
+        </div>
+        <div class="col-md-11 comment-content">
+            <h5>{{ comment.user_id }} - {{ comment.date }}</h5>
+            <p>{{ comment.comment }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}

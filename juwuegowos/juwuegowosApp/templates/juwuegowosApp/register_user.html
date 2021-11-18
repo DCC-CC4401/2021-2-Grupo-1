@@ -8,7 +8,7 @@ Registro
 <body>
     <div class="container">
         <h1> Registro </h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <label for="nombre_usuario">Nombre</label>
@@ -27,10 +27,10 @@ Registro
             
             <div class="form-group">
                 <label for="img-usuario">Imagen de usuario</label>
-                <input type="file" class="form-control" id="imagen" name="img-usuario">
+                <input type="file" class="form-control" id="imagen" name="img-usuario" multiple="false">
             </div>
     
-            <button type="submit">Crear usuario</button>
+            <button type="submit" id="boton-crear-usuario">Crear usuario</button>
         </form>
     </div>
  </body>
