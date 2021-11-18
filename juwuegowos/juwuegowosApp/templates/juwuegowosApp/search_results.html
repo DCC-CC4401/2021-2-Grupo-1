@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Busqueda
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-white">Resultado de busqueda: {{searched}}</h3>
+    <div class="row">
+    {% for game in game_search %}
+        <div class="col-md-4">
+            <div class = "card text-white bg-dark game-card">
+
+                {% if game.nsfw %}
+                    <div class="container-over">
+                        <img class="card-img-top game-thumbnail nsfw" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+                        <div class="nsfw-text">Poner cursor encima para ver</div>
+                    </div>
+                {% else %}
+                    <div>
+                        <img class="card-img-top game-thumbnail" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+                    </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ game.name }}
+                        {% if game.nsfw %}
+                            <span class="badge bg-danger">18+</span>
+                        {% endif %}
+                    </h5>
+
+                    <p class="card-text">{{ game.description }}</p>
+                </div>
+
+                <div class="card-footer">
+                     <div>
+                        <a href="jugar/{{ game.id }}" class="btn btn-primary">Jugar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}

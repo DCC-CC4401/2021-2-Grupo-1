@@ -11,10 +11,17 @@ from django.core.files.storage import FileSystemStorage
 def testView(request):
     return render(request, "test.html")
 
+def search_results(request):
+    if request.method == "POST":
+        searched = request.POST["search"]
+        if searched == '': 
+            return HttpResponseRedirect("/")
+        games = Game.objects.filter(name__contains=searched)
+        passed = {'searched' : searched, 'game_search': games}   
+        return render(request, "juwuegowosApp/search_results.html", passed)
 
 def home(request):  # the index view
     return render(request, "juwuegowosApp/index.html")
-
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
@@ -39,6 +46,10 @@ def register_user(request):
         return HttpResponseRedirect('/login')
 
 
+        #Crear el nuevo usuario
+        user = User.objects.create_user(username=nombre, password=contraseña, email=mail, picture=imagen)
+        #Redireccionar la página /home
+        return HttpResponseRedirect('/login')
 
 def login_user(request):
     if request.method == 'GET':
