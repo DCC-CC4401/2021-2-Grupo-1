@@ -8,23 +8,29 @@ Jugar
 {% block content %}
 <div class="container game-container">
     <h1>{{ game.name }}</h1>
-    <!--<iframe src="http://v6p9d9t4.ssl.hwcdn.net/html/4565765/index.html" height="600" width="1024"></iframe> -->
     <iframe src="/media/games/{{ game.id }}/index.html" height="720" width="1280"></iframe>
     <div class="container description-container">
         <p>{{ game.description }}</p>
     </div>
     <div class="container">
         <h3>Comentarios:</h3>
+        <input type="hidden" name="game-id" id="game-id" value="{{ game.id }}">
         <div class="container">
-            <form onsubmit="return postComment();">
+            {% if user.is_authenticated %}
+            <form method="POST" id="comment-form" action="/comments/{{ game.id }}/">
+                {% csrf_token %}
                 <!--<label for="new-comment">A</label>-->
                 <!--<input type="text" name="new-comment">-->
-                <textarea cols="100" rows="1" name="comment" id="comment-box" placeholder="Escribe un comentario"></textarea>
-                <button type="button" onclick="postComment();">Publicar</button>
+                <textarea cols="50" name="comment" id="comment-box" class="comment-box" placeholder="Escribe un comentario"></textarea>
+                <!--<input type="text" name="comment" id="comment-box" placeholder="Escribe uncomentario">-->
+                <button type="submit">Publicar</button>
             </form>
+            {% else %}
+            <p>Registrate para poder comentar.</p>
+            {% endif %}
         </div>
-        <div class="container" id="comment-section" onload="loadComments();">
-
+        <div class="container" id="comment-section">
+            <script>loadComments();</script>
         </div>
     </div>
     

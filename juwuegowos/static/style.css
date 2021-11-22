@@ -11,6 +11,10 @@
     vertical-align: middle;
 }
 
+.comment-box {
+    resize: none;
+}
+
 
 .game-container {
     /*border-width: 16px;*/
@@ -80,23 +84,51 @@
 }
 
 .description-container {
-    background-color: #b776df;
+    background-color: #402650;
     padding: 32px;
     border-radius: 16px;
 }
 
 .comment {
-    background-color: #b776df;
-    padding: 32px;
-    border-radius: 16px;
+    /*background-color: #341d42;
+    padding: 8px;
+    border-radius: 8px;*/
+    margin-bottom: 16px;
 }
 
-.comment.comment-content h5 {
-    font-size: 24px;
+.username-comment {
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.comment.comment-pfp {
+.dev-username-comment {
+    font-size: 18px;
+    font-weight: 600;
+    color: gold;
+}
+
+.date-comment {
+    font-size: 16px;
+    font-weight: 400;
+    color: #808080;
+}
+
+.text-comment {
+    font-size: 18px;
+}
+
+.comment-pfp {
     display: inline-block;
+}
+
+.comment-picture-container {
+    float: inline-start;
+}
+
+.comment-content-container {
+    display: inline-block;
+    padding-left: 16px;
+    width: 80%;
 }
 
 .main-page {
