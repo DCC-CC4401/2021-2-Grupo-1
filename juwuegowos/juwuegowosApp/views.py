@@ -65,8 +65,15 @@ def play_game(request, game_id):
 
 
 def catalog(request):
+    limit = 6
     games = Game.objects.all()
-    return render(request, "juwuegowosApp/catalogo.html", {"games": games})
+    games_by_date = games.order_by('date')
+    games_by_random = games.order_by('?')
+    return render(request, "juwuegowosApp/catalogo.html", {
+        "games": games[:limit],
+        "games_by_date": games_by_date[:limit],
+        "games_by_random": games_by_random[:limit]
+    })
 
 
 def game_comments(request, game_id):
