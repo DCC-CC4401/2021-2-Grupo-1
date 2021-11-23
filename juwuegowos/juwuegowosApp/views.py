@@ -3,9 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from juwuegowosApp.models import User, Game, Comment
-from django.shortcuts import render
+from juwuegowosApp.forms import Gameform
+from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
+import zipfile
+from os import remove, mkdir
 
 
 def testView(request):
@@ -79,3 +82,11 @@ def game_comments(request, game_id):
         new_comment.save()
         comments = Comment.objects.filter(game_id=game_id)
         return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
+
+def editar_juego(request, game_id):
+    game = Game.objects.filter(id=game_id)[0]
+    form = Gameform(request.POST or None, instance= game)
+    if form.is_valid():
+        form.save()
+        return redirect("catalogo")
+    return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
