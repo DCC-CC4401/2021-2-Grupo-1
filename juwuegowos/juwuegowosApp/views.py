@@ -7,7 +7,11 @@ from juwuegowosApp.models import User, Game, Comment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
+from django import forms
 
+
+class CommentForm(forms.Form):
+    comment = forms.CharField()
 
 
 def testView(request):
@@ -71,16 +75,21 @@ def catalog(request):
     return render(request, "juwuegowosApp/catalogo.html", {"games": games})
 
 
-def game_comments(request, game_id):
+def game_comments(request, game_id, page, order):
     if request.method == "GET":
         game = Game.objects.filter(id=game_id)[0]
-        comments = Comment.objects.filter(game_id=game)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        cond = "-" if order == 1 else ""
+        comments = Comment.objects.filter(game_id=game).order_by(f"{cond}date")[page*15:(page+1)*15]
+        if len(comments) > 0:
+            return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        return HttpResponseNotModified()
     elif request.method == "POST":
         comment = request.POST["comment"]
         game = Game.objects.filter(id=game_id)[0]
+        cond = "-" if order == 1 else ""
         new_comment = Comment(comment=comment, game_id=game, user_id=request.user) #obtener la id del usuario
         new_comment.save()
-        comments = Comment.objects.filter(game_id=game)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
-        #return HttpResponseNotModified()
+        comments = Comment.objects.filter(game_id=game).order_by(f"{cond}date")[page*15:(page+1)*15]
+        if len(comments) > 0:
+            return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        return HttpResponseNotModified()
