@@ -12,4 +12,5 @@ urlpatterns = [
     path("catalogo", views.testView, name="catalogo"),
     path("jugar/<int:game_id>/", views.play_game, name="jugar"),
     path("comments/<int:game_id>/<int:page>/<int:order>/", view=views.game_comments, name="comments"),
+    path("comments/<int:game_id>/", view=views.post_comment, name="post_comment"),
 ]
