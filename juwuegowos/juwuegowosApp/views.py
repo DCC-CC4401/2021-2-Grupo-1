@@ -69,8 +69,10 @@ def catalog(request):
     games = Game.objects.all()
     games_by_date = games.order_by('date')
     games_by_random = games.order_by('?')
+    #games_featured = games.filter(name="Una Marraqueta")
+    games_featured = games
     return render(request, "juwuegowosApp/catalogo.html", {
-        "games": games[:limit],
+        "games_featured": games_featured[:limit],
         "games_by_date": games_by_date[:limit],
         "games_by_random": games_by_random[:limit]
     })

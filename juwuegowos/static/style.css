@@ -33,12 +33,19 @@
     padding-top: 32px;
     margin-right: auto;
     margin-left: auto;
+    display: grid;
 }
 
 .game-thumbnail {
     height: 225px;
     width: 100%;
     display: block;
+}
+
+.game-cover {
+    width: 80%;
+    max-height: 500px;
+    object-fit: cover;
 }
 
 .game-card {
@@ -53,6 +60,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* Text over image */
+.over-text {
+    text-shadow: 3px 3px 5px black, -3px 3px 5px black, -3px -3px 5px black, 3px -3px 5px black;
+}
+
+/* Botón carousel */
+.jugar-carousel {
+    position: absolute;
+    left: 84%;
+    top: 92%;
+    z-index: 100;
 }
 
 .container-over {

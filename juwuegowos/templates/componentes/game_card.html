@@ -1,14 +1,9 @@
 <div class = "card text-white bg-dark game-card">
-    {% if game.nsfw %}
-        <div class="container-over">
-            <img class="card-img-top game-thumbnail nsfw" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
-            <div class="nsfw-text">Poner cursor encima para ver</div>
-        </div>
-    {% else %}
-        <div>
-            <img class="card-img-top game-thumbnail" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
-        </div>
-    {% endif %}
+
+    <div class="container-over">
+        <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+        {% if game.nsfw %}<div class="nsfw-text">Poner cursor encima para ver</div>{% endif %}
+    </div>
 
     <div class="card-body">
         <h5 class="card-title">
