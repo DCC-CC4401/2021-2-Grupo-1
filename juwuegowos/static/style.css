@@ -11,14 +11,22 @@
     vertical-align: middle;
 }
 
-<<<<<<< HEAD
 .comment-box {
+    overflow: hidden;
     resize: none;
+    margin-left: 10px;
+    margin-bottom: 16px;
+    background-color: #121212;
+    color: #ddd;
+    border-bottom-color: #0bf;
+    border-bottom-width: 3px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding-bottom: 8px;
 }
 
 
-=======
->>>>>>> homepage
 .game-container {
     border: 16px darkgray;
 }
@@ -41,7 +49,6 @@
     padding-top: 32px;
     margin-right: auto;
     margin-left: auto;
-    display: grid;
 }
 
 .game-thumbnail {
@@ -126,10 +133,38 @@
     margin-left: 10px;
 }
 
+.btn-secondary {
+    background-color: #444444;
+    border-color: #444444;
+}
+
 .description-container {
-    background-color: #402650;
-    padding: 32px;
+    /* background-color: #402650; */
+    /* padding-left: 16px, 16px, 16px, 16px; */
+    padding: 32px !important;
     border-radius: 16px;
+    /* border-bottom-color: aqua; */
+    border-bottom-width: 3px;
+    /* border-bottom: 3px solid #0bf; */
+    /* border-left: 5px solid #0bf; */
+    /* border-right: 5px solid #0bf; */
+    /* box-shadow: 10px 10px #333741ad, -10px -10px #333741ad; */
+    box-shadow: 0 0 3px 3px rgba(0, 187, 255, 0.75);
+}
+
+.link-blue {
+    color: #0bf;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-blue:hover {
+    color: #0d6efd;
+}
+
+.load-more-comments {
+    display: flex;
+    justify-content: center;
 }
 
 .comment {
@@ -137,6 +172,14 @@
     padding: 8px;
     border-radius: 8px;*/
     margin-bottom: 16px;
+}
+
+.comments-login-message {
+    padding-left: 10px;
+    font-size: 18px;
+    border-bottom: 3px solid #0bf;
+    padding-bottom: 8px;
+    width: 500px;
 }
 
 .username-comment {
@@ -172,6 +215,17 @@
     display: inline-block;
     padding-left: 16px;
     width: 80%;
+}
+
+#comment-form div {
+    margin-top: 16px;
+}
+
+.comment-order-label {
+    font-size: 18px;
+    font-weight: bold;
+    vertical-align: middle;
+    padding-left: 10px;
 }
 
 .main-page {

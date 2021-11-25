@@ -121,16 +121,19 @@ def catalog(request):
     })
 
 
-def game_comments(request, game_id):
+def game_comments(request, game_id, page, order):
     if request.method == "GET":
         game = Game.objects.filter(id=game_id)[0]
-        comments = Comment.objects.filter(game_id=game)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
-    elif request.method == "POST":
+        cond = "-" if order == 1 else ""
+        comments = Comment.objects.filter(game_id=game).order_by(f"{cond}date")[page*15:(page+1)*15]
+        if len(comments) > 0:
+            return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        return HttpResponseNotModified()
+
+def post_comment(request, game_id):
+    if request.method == "POST":
         comment = request.POST["comment"]
         game = Game.objects.filter(id=game_id)[0]
-        new_comment = Comment(comment=comment, game_id=game, user_id=request.user) #obtener la id del usuario
+        new_comment = Comment(comment=comment, game_id=game, user_id=request.user)
         new_comment.save()
-        comments = Comment.objects.filter(game_id=game)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
-        #return HttpResponseNotModified()
+        return HttpResponseNotModified()
