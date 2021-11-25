@@ -7,7 +7,11 @@ Catálogo
 {% block content %}
     <div class="container">
 
-        <h2 class="text-white text-center">🔥Novedades🔥</h2>
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">local_fire_department</span>
+                Novedades
+            <span class="material-icons md-light side-icon">local_fire_department</span>
+        </h2>
 
         <div id="carousel-novedades" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -35,7 +39,11 @@ Catálogo
 
         <hr class="section-separator">
 
-        <h2 class="text-white text-center">⭐Recomendados⭐</h2>
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">star</span>
+                Recomendados
+            <span class="material-icons md-light side-icon">star</span>
+        </h2>
         <div class="row">
             {% for game in games_featured %}
             <div class="col-md-4 col-lg-4 col-12">
@@ -46,7 +54,12 @@ Catálogo
 
         <hr class="section-separator">
 
-        <h2 class="text-white text-center">🎲Random🎲</h2>
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">casino</span>
+                Random
+            <span class="material-icons md-light side-icon">casino</span>
+        </h2>
+
         <div class="row">
             {% for game in games_by_random %}
             <div class="col-md-4">

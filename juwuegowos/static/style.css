@@ -54,7 +54,14 @@
     margin: auto;
     margin-top: 9px;
     overflow: hidden;
+    box-shadow: 8px 7px 9px 3px rgb(0 0 0 / 33%);
+    transition: transform 200ms ease-in-out;
 }
+
+.game-card:hover {
+    transform: translate(0px, -13px);
+}
+
 
 .game-text {
     height: 3em;
@@ -133,9 +140,15 @@
 }
 
 .main-page {
-    margin-top: 3%;
+    margin-top: 80px;
     margin-bottom: 5%;
 }
+
+.side-icon {
+    vertical-align: baseline;
+}
+
+
 body {
     background-color: #121212;
     color: #cad2d1;
