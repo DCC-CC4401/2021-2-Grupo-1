@@ -18,7 +18,7 @@ Catálogo
                 {% for game in games_by_date %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
                         <a href="jugar/{{ game.id }}">
-                            <img class="game-cover rounded mx-auto d-block {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+                            <img class="game-cover rounded mx-auto d-block {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
                         </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5 class="over-text">{{ game.name }}</h5>

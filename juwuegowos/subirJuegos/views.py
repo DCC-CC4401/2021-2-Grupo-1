@@ -36,7 +36,7 @@ def subir_juegos(request):
         remove("media/" + file_path)
 
 
-        image_file_path = f"images/games/{game.id}/thumbnail.{game_thmbnl.name.split('.')[-1]}"
+        image_file_path = f"images/games/{game.id}/thumbnail.png"
         mkdir(f"media/images/games/{game.id}")
         fs.save(image_file_path, game_thmbnl)
 

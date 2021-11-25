@@ -208,7 +208,7 @@
 }
 
 .comment-picture-container {
-    float: inline-start;
+    float: left;
 }
 
 .comment-content-container {
