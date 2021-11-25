@@ -1,11 +1,13 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponseNotModified
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from juwuegowosApp.models import User, Game, Comment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
+
 
 
 def testView(request):
@@ -78,13 +80,19 @@ def catalog(request):
     })
 
 
-def game_comments(request, game_id):
+def game_comments(request, game_id, page, order):
     if request.method == "GET":
-        comments = Comment.objects.filter(game_id=game_id)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
-    elif request.method == "POST":
+        game = Game.objects.filter(id=game_id)[0]
+        cond = "-" if order == 1 else ""
+        comments = Comment.objects.filter(game_id=game).order_by(f"{cond}date")[page*15:(page+1)*15]
+        if len(comments) > 0:
+            return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        return HttpResponseNotModified()
+
+def post_comment(request, game_id):
+    if request.method == "POST":
         comment = request.POST["comment"]
-        new_comment = Comment(comment=comment, game_id=game_id, user_id=0) #obtener la id del usuario
+        game = Game.objects.filter(id=game_id)[0]
+        new_comment = Comment(comment=comment, game_id=game, user_id=request.user)
         new_comment.save()
-        comments = Comment.objects.filter(game_id=game_id)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
+        return HttpResponseNotModified()

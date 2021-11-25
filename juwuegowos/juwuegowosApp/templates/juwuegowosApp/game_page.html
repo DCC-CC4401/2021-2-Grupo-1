@@ -8,7 +8,6 @@ Jugar
 {% block content %}
 <div class="container game-container">
     <h1>{{ game.name }}</h1>
-    <!--<iframe src="http://v6p9d9t4.ssl.hwcdn.net/html/4565765/index.html" height="600" width="1024"></iframe> -->
     <iframe src="/media/games/{{ game.id }}/index.html" height="720" width="1280"></iframe>
     <div class="container description-container">
         <p>{{ game.description }}</p>
@@ -16,15 +15,33 @@ Jugar
     <div class="container">
         <h3>Comentarios:</h3>
         <div class="container">
-            <form onsubmit="return postComment();">
-                <!--<label for="new-comment">A</label>-->
-                <!--<input type="text" name="new-comment">-->
-                <textarea cols="100" rows="1" name="comment" id="comment-box" placeholder="Escribe un comentario"></textarea>
-                <button type="button" onclick="postComment();">Publicar</button>
+            {% if user.is_authenticated %}
+            <form method="POST" id="comment-form" action="/comments/{{ game.id }}/">
+                {% csrf_token %}
+                <div>
+                    <textarea cols="64" rows="1" name="comment" id="comment-box" class="comment-box" placeholder="Escribe un comentario" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Publicar</button>
             </form>
+            {% else %}
+            <p class="comments-login-message"><a href="/register" class="link-blue">Regístrate</a> o <a href="/login" class="link-blue">inicia sesión</a> para poder comentar.</p>
+            {% endif %}
         </div>
-        <div class="container" id="comment-section" onload="loadComments();">
-
+        <div class="container">
+            <input type="hidden" name="game-id" id="game-id" value="{{ game.id }}">
+            <label for="comment-order" class="comment-order-label">Ordenar por: </label>
+            <select id="comment-order" name="comment-order" class="btn btn-secondary" onchange="loadComments(true);">
+                <option value="1">Recientes</option>
+                <option value="2">Antiguos</option>
+            </select>
+        </div>
+        <div class="container" id="comment-section">
+            <script>
+                loadComments(true);
+            </script>
+        </div>
+        <div class="load-more-comments" id="load-more-comments">
+            <button class="btn btn-primary" onclick="loadComments(false);">Cargar más comentarios</button>
         </div>
     </div>
     
