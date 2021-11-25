@@ -23,9 +23,6 @@ def search_results(request):
         #pasarlo todo a palabras separadas por espacios
         game_name, tags, dev = parse(searched)
         dev_user = User.objects.filter(username__contains=dev)
-        print(game_name)
-        print(tags)
-        print(dev_user)
         games = Game.objects.all()
         if tags:
             games = games.filter(tags__name__in=tags)
