@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Busqueda
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-white">Resultado de busqueda:</h3>
+    <div class="row">
+    {% for game in game_search %}
+        <div class = "col-md-4 col-lg-4 col-12">
+            {% include "componentes/game_card.html" %}
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}

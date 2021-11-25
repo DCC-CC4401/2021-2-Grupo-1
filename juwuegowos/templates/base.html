@@ -30,12 +30,17 @@
 
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<form class="d-flex">
-      				<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" size="100%">
-      				<button class="btn btn-outline-success" type="submit">
-      					<span class="material-icons md-36">search</span>
-      				</button>
-    				</form>
+						<form class="d-flex" method="POST" action="{% url 'search_results' %}">
+                            {% csrf_token %}
+                            {% if searched %}
+      				            <input class="form-control me-2" type="search" placeholder="Buscar por nombre del juego, #tags o @desarrollador" name="search" aria-label="Search" size="100%" value="{{searched}}">
+                            {% else %}
+                                <input class="form-control me-2" type="search" placeholder="Buscar por nombre del juego, #tags o @desarrollador" name="search" aria-label="Search" size="100%">
+                            {% endif %}
+      				        <button class="btn btn-outline-success" type="submit">
+      					    <span class="material-icons md-36">search</span>
+      			    	    </button>
+    				    </form>
 					</li>
 				</ul>
 
