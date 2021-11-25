@@ -3,7 +3,7 @@
 
     <div class="container-over">
     <a href="jugar/{{ game.id }}">
-        <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+        <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
         {% if game.nsfw %}<div class="nsfw-text text-white">Poner cursor encima para ver</div>{% endif %}
     </a>
     </div>
