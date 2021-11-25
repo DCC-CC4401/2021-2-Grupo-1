@@ -6,43 +6,67 @@ Catálogo
 
 {% block content %}
     <div class="container">
-    <h3 class="text-white">Novedades:</h3>
-    <div class="row">
-    {% for game in games %}
-        <div class="col-md-4">
-            <div class = "card text-white bg-dark game-card">
 
-                {% if game.nsfw %}
-                    <div class="container-over">
-                        <img class="card-img-top game-thumbnail nsfw" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
-                        <div class="nsfw-text">Poner cursor encima para ver</div>
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">local_fire_department</span>
+                Novedades
+            <span class="material-icons md-light side-icon">local_fire_department</span>
+        </h2>
+
+        <div id="carousel-novedades" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for game in games_by_date %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <a href="jugar/{{ game.id }}">
+                            <img class="game-cover rounded mx-auto d-block {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5 class="over-text">{{ game.name }}</h5>
+                            <p class="over-text">{{ game.description }}</p>
+                        </div>
                     </div>
-                {% else %}
-                    <div>
-                        <img class="card-img-top game-thumbnail" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
-                    </div>
-                {% endif %}
-
-                <div class="card-body">
-                    <h5 class="card-title">
-                        {{ game.name }}
-                        {% if game.nsfw %}
-                            <span class="badge bg-danger">18+</span>
-                        {% endif %}
-                    </h5>
-
-                    <p class="card-text">{{ game.description }}</p>
-                </div>
-
-                <div class="card-footer">
-                     <div>
-                        <a href="jugar/{{ game.id }}" class="btn btn-primary">Jugar</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-novedades" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-novedades" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    {% endfor %}
-    </div>
-    </div>
 
+        <hr class="section-separator">
+
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">star</span>
+                Recomendados
+            <span class="material-icons md-light side-icon">star</span>
+        </h2>
+        <div class="row">
+            {% for game in games_featured %}
+            <div class="col-md-4 col-lg-4 col-12">
+                {% include "componentes/game_card.html" %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="section-separator">
+
+        <h2 class="text-white text-center">
+            <span class="material-icons md-light side-icon">casino</span>
+                Random
+            <span class="material-icons md-light side-icon">casino</span>
+        </h2>
+
+        <div class="row">
+            {% for game in games_by_random %}
+            <div class="col-md-4">
+                {% include "componentes/game_card.html" %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
 {% endblock %}
