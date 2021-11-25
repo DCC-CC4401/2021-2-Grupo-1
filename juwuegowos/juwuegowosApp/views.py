@@ -7,6 +7,7 @@ from juwuegowosApp.models import User, Game, Comment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
 
 
 
@@ -18,10 +19,39 @@ def search_results(request):
         searched = request.POST["search"]
         if searched == '': 
             return HttpResponseRedirect("/")
-        games = Game.objects.filter(name__contains=searched)
+        #parsing the string to filter
+        #pasarlo todo a palabras separadas por espacios
+        game_name, tags, dev = parse(searched)
+        dev_user = User.objects.filter(username__contains=dev)
+        print(game_name)
+        print(tags)
+        print(dev_user)
+        games = Game.objects.all()
+        if tags:
+            games = games.filter(tags__name__in=tags)
+        if game_name:
+            games = games.filter(name__contains=game_name)
+        if dev_user:
+            games = games.filter(developer__in=dev_user)
+
         passed = {'searched' : searched, 'game_search': games}   
         return render(request, "juwuegowosApp/search_results.html", passed)
 
+def parse(search):
+    word_list = search.replace(',',' ').replace(';',' ').split()
+    name_w = []
+    tags = []
+    dev = ''
+    for w in word_list:
+        if '#' in w:
+            tags += [w[1:]]
+        elif '@' in w:
+            dev = w[1:]
+        else:
+            name_w += [w]
+    name = ' '.join(name_w)
+    return name, tags, dev
+        
 def home(request):  # the index view
     return render(request, "juwuegowosApp/index.html")
 

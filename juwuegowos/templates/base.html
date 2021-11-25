@@ -32,7 +32,11 @@
 					<li class="nav-item">
 						<form class="d-flex" method="POST" action="{% url 'search_results' %}">
                             {% csrf_token %}
-      				        <input class="form-control me-2" type="search" placeholder="Buscar" name="search" aria-label="Search" size="100%">
+                            {% if searched %}
+      				            <input class="form-control me-2" type="search" placeholder="Buscar por nombre del juego, #tags o @desarrollador" name="search" aria-label="Search" size="100%" value="{{searched}}">
+                            {% else %}
+                                <input class="form-control me-2" type="search" placeholder="Buscar por nombre del juego, #tags o @desarrollador" name="search" aria-label="Search" size="100%">
+                            {% endif %}
       				        <button class="btn btn-outline-success" type="submit">
       					    <span class="material-icons md-36">search</span>
       			    	    </button>
