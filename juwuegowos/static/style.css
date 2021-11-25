@@ -40,6 +40,7 @@
     height: 225px;
     width: 100%;
     display: block;
+    object-fit: cover;
 }
 
 .game-cover {
@@ -49,22 +50,36 @@
 }
 
 .game-card {
-    width: 20rem;
-    height: 100%;
+    /*width: 20rem;*/
+    margin: auto;
+    margin-top: 9px;
+    overflow: hidden;
+}
+
+.game-text {
+    height: 3em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
 /* Centered text */
 .nsfw-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Text over image */
 .over-text {
     text-shadow: 3px 3px 5px black, -3px 3px 5px black, -3px -3px 5px black, 3px -3px 5px black;
+}
+
+.section-separator {
+    margin-top: 22px;
+    margin-bottom: 15px;
 }
 
 /* Botón carousel */
@@ -118,8 +133,8 @@
 }
 
 .main-page {
-    margin-top: 5%;
-    margin-bottom: 10%;
+    margin-top: 3%;
+    margin-bottom: 5%;
 }
 body {
     background-color: #121212;

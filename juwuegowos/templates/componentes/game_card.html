@@ -1,8 +1,11 @@
+
 <div class = "card text-white bg-dark game-card">
 
     <div class="container-over">
+    <a href="jugar/{{ game.id }}">
         <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
-        {% if game.nsfw %}<div class="nsfw-text">Poner cursor encima para ver</div>{% endif %}
+        {% if game.nsfw %}<div class="nsfw-text text-white">Poner cursor encima para ver</div>{% endif %}
+    </a>
     </div>
 
     <div class="card-body">
@@ -13,7 +16,7 @@
             {% endif %}
         </h5>
 
-        <p class="card-text">{{ game.description }}</p>
+        <p class="card-text game-text">{{ game.description }}</p>
     </div>
 
     <div class="card-footer">
@@ -21,4 +24,6 @@
             <a href="jugar/{{ game.id }}" class="btn btn-primary">Jugar</a>
         </div>
     </div>
+
 </div>
+

@@ -13,12 +13,13 @@ Catálogo
             <div class="carousel-inner">
                 {% for game in games_by_date %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img class="game-cover rounded mx-auto d-block {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+                        <a href="jugar/{{ game.id }}">
+                            <img class="game-cover rounded mx-auto d-block {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png" onerror="this.src = '/media/images/games/{{ game.id }}/thumbnail.jpg'">
+                        </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5 class="over-text">{{ game.name }}</h5>
                             <p class="over-text">{{ game.description }}</p>
                         </div>
-                        <a href="jugar/{{ game.id }}" class="btn btn-primary jugar-carousel">Jugar</a>
                     </div>
                 {% endfor %}
             </div>
@@ -31,18 +32,19 @@ Catálogo
             <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <hr>
+
+        <hr class="section-separator">
 
         <h2 class="text-white text-center">⭐Recomendados⭐</h2>
         <div class="row">
             {% for game in games_featured %}
-            <div class="col-md-4">
+            <div class="col-md-4 col-lg-4 col-12">
                 {% include "componentes/game_card.html" %}
             </div>
             {% endfor %}
         </div>
 
-        <hr>
+        <hr class="section-separator">
 
         <h2 class="text-white text-center">🎲Random🎲</h2>
         <div class="row">
