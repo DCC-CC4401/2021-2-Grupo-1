@@ -1,6 +1,7 @@
+from os import path
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http.response import HttpResponseNotModified
+from django.http.response import Http404, HttpResponseNotFound, HttpResponseNotModified
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from juwuegowosApp.models import User, Game, Comment
@@ -62,8 +63,12 @@ def logout_user(request):
 
 
 def play_game(request, game_id):
-    game = Game.objects.filter(id=game_id)[0]
-    return render(request, "juwuegowosApp/game_page.html", {"game": game})
+    if request.method == "GET":
+        games = Game.objects.filter(id=game_id)
+        if len(games) > 0:
+            game = games[0]
+            return render(request, "juwuegowosApp/game_page.html", {"game": game})
+        raise Http404()
 
 
 def catalog(request):
@@ -87,3 +92,15 @@ def post_comment(request, game_id):
         new_comment = Comment(comment=comment, game_id=game, user_id=request.user)
         new_comment.save()
         return HttpResponseNotModified()
+
+def view404(request, e):
+    return render(request, "404.html")
+
+def view500(request, e):
+    return render(request, "404.html")
+
+def view403(request, e):
+    return render(request, "404.html")
+
+def view400(request, e):
+    return render(request, "404.html")

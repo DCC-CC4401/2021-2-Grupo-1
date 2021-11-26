@@ -1,0 +1,29 @@
+body {
+    background-color: #121212;
+    color: #eee;
+    padding: 100px;
+}
+
+.errmes {
+    margin: 64px;
+}
+
+h1 {
+    font-size: 64px;
+    /* color: #0bf; */
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 48px;
+    color: #0bf;
+    font-weight: 400;
+}
+
+li {
+    font-size: 32px;
+}
+
+div {
+    display: inline-block;
+}
