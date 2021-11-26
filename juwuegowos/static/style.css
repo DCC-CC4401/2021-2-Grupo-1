@@ -275,3 +275,27 @@ body {
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
+
+
+.errmes {
+    margin: 64px;
+}
+
+.errmes h1 {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.errmes h2 {
+    font-size: 48px;
+    color: #0bf;
+    font-weight: 400;
+}
+
+.errmes li {
+    font-size: 32px;
+}
+
+.error-content {
+    margin: 150px;
+}
