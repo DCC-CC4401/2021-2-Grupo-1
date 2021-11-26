@@ -3,7 +3,9 @@
 
     <div class="container-over">
     <a href="jugar/{{ game.id }}">
-        <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
+        <div class="overflow-container">
+            <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
+        </div>
         {% if game.nsfw %}<div class="nsfw-text text-white">Poner cursor encima para ver</div>{% endif %}
     </a>
     </div>
@@ -12,7 +14,7 @@
         <h5 class="card-title">
             {{ game.name }}
             {% if game.nsfw %}
-                <span class="badge bg-danger">18+</span>
+                <span class="badge bg-danger rounded-pill nsfw-badge">18+</span>
             {% endif %}
         </h5>
 
