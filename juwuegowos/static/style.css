@@ -28,7 +28,6 @@
 
 
 .game-container {
-    /*border-width: 16px;*/
     border: 16px darkgray;
 }
 
@@ -56,20 +55,75 @@
     height: 225px;
     width: 100%;
     display: block;
+    object-fit: cover;
+}
+
+.game-cover {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+.game-cover-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
 }
 
 .game-card {
-    width: 20rem;
-    height: 100%;
+    /*width: 20rem;*/
+    margin: 9px auto;
+    overflow: hidden;
+    box-shadow: 8px 7px 9px 3px rgb(0 0 0 / 33%);
+    transition: transform 200ms ease-in-out;
+}
+
+.game-card:hover {
+    transform: translate(0px, -13px);
+}
+
+
+.game-text {
+    height: 3em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
 /* Centered text */
 .nsfw-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.nsfw-badge {
+    vertical-align: top;
+    font-size: 8pt;
+}
+
+.overflow-container {
+    overflow: hidden;
+}
+
+/* Text over image */
+.over-text {
+    text-shadow: 3px 3px 5px black, -3px 3px 5px black, -3px -3px 5px black, 3px -3px 5px black;
+}
+
+.section-separator {
+    margin-top: 22px;
+    margin-bottom: 15px;
+}
+
+/* Botón carousel */
+.jugar-carousel {
+    position: absolute;
+    left: 84%;
+    top: 92%;
+    z-index: 100;
 }
 
 .container-over {
@@ -83,6 +137,10 @@
 }
 
 .container-over:hover .nsfw {
+    filter: blur(0px);
+}
+
+.overflow-container:hover .nsfw {
     filter: blur(0px);
 }
 
@@ -169,7 +227,7 @@
 }
 
 .comment-picture-container {
-    float: inline-start;
+    float: left;
 }
 
 .comment-content-container {
@@ -190,10 +248,30 @@
 }
 
 .main-page {
-    margin-top: 5%;
-    margin-bottom: 10%;
+    margin-top: 80px;
+    margin-bottom: 5%;
 }
+
+.side-icon {
+    vertical-align: baseline;
+}
+
+
 body {
     background-color: #121212;
     color: #cad2d1;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
