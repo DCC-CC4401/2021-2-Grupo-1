@@ -5,5 +5,5 @@ from .models import Game
 class Gameform(ModelForm):
     class Meta:
         model = Game
-        fields = ('name', 'description', 'nsfw')
-        
+        fields = ("name", "description", 'nsfw', "tags")
+        required = ("name", "description", "tags")

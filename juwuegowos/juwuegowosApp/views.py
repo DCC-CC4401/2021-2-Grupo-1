@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
 import zipfile
-from os import remove, mkdir
+import os, shutil
 
 
 def testView(request):
@@ -84,8 +84,35 @@ def game_comments(request, game_id):
         return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
 
 def editar_juego(request, game_id):
-    game = Game.objects.filter(id=game_id)[0]
-    form = Gameform(request.POST or None, instance= game)
-    # if form.is_valid():
-    # aqui explota
-    return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
+    if request.method == "GET":
+        game = Game.objects.filter(id=game_id)[0]
+        form = Gameform(None, instance= game)
+        return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
+    elif request.method == "POST":
+        game = Game.objects.filter(id=game_id)[0]
+        form = Gameform(request.POST or None, instance= game)
+        if form.is_valid():
+            form.save()
+            if "game-files" in request.FILES:
+                game_files = request.FILES["game-files"]
+                fs = FileSystemStorage()
+                folder = f"media/games/{game.id}/"
+                zip_path = f"games/{game.id}/{game_files.name}"
+                shutil.rmtree(folder)
+                os.mkdir(folder)
+
+                filename = fs.save(zip_path, game_files)
+
+                with zipfile.ZipFile("media/" + zip_path) as file:
+                    for fname in file.namelist():
+                        file.extract(fname, f"media/games/{game.id}")
+                os.remove("media/" + zip_path)
+
+            if "game-img" in request.FILES:
+                game_thmbnl = request.FILES["game-img"]
+                fs = FileSystemStorage()
+                image_file_path = f"images/games/{game.id}/thumbnail.png"
+                fs.save(image_file_path, game_thmbnl)
+            return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})    
+        return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
+    

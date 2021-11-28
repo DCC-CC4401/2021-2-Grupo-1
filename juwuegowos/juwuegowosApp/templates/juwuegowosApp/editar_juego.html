@@ -13,17 +13,17 @@ Editar juegos
                 <label for="game-name" class="form-label">
                     Nombre del Juego:
                 </label>
-                <input type="text" class="form-control" id="game-name" name="game-name" 
+                <input type="text" class="form-control" id="game-name" name="name" 
                 required value="{{ game.name }}"> 
             </div>
             <div class="form-group">
                 <label for="game-desc" class="form-label">Descripcion del juego:</label>
-                <textarea class="form-control" id="game-desc" name="game-desc"
+                <textarea class="form-control" id="game-desc" name="description"
                 rows=3 style="resize: none;" required>{{ game.description }}</textarea>
             </div>
             <div class="form-group">
                 <label for="game-tags" class="form-label">Tags: :</label>
-                <textarea class="form-control" id="game-tags" name="game-tags" placeholder="tags: action, adventure, rpg..."
+                <textarea class="form-control" id="game-tags" name="tags" placeholder="tags: action, adventure, rpg..."
                 rows=3 style="resize: none;">{% for names in game.tags.names.all %}{{ names }}{{ ", " }}{% endfor %}</textarea>
             </div>
             <div class="form-group">
@@ -37,7 +37,7 @@ Editar juegos
             </div>
             <div class="form-group">
                 <label for="nsfw" class="form-label">¿Para mayores de 18?</label>
-                <input type="checkbox" id="nsfw" name="nsfw" checked="{{ game.nsfw }}">
+                <input type="checkbox" id="nsfw" name="nsfw" {% if game.nsfw %} checked {% endif %}>
             </div>
             <div class="form-group">
                 <input type="submit" value="Guardar">
