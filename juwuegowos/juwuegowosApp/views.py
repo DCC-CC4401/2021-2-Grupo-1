@@ -86,7 +86,6 @@ def game_comments(request, game_id):
 def editar_juego(request, game_id):
     game = Game.objects.filter(id=game_id)[0]
     form = Gameform(request.POST or None, instance= game)
-    if form.is_valid():
-        form.save()
-        return redirect("catalogo")
+    # if form.is_valid():
+    # aqui explota
     return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})

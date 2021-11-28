@@ -14,30 +14,30 @@ Editar juegos
                     Nombre del Juego:
                 </label>
                 <input type="text" class="form-control" id="game-name" name="game-name" 
-                placeholder="Ingresa el nombre del juego" required> 
+                required value="{{ game.name }}"> 
             </div>
             <div class="form-group">
                 <label for="game-desc" class="form-label">Descripcion del juego:</label>
-                <textarea class="form-control" id="game-desc" name="game-desc" placeholder="Escribe una breve descripción de tu juego."
-                rows=3 style="resize: none;" required></textarea>
+                <textarea class="form-control" id="game-desc" name="game-desc"
+                rows=3 style="resize: none;" required>{{ game.description }}</textarea>
             </div>
             <div class="form-group">
                 <label for="game-tags" class="form-label">Tags: :</label>
                 <textarea class="form-control" id="game-tags" name="game-tags" placeholder="tags: action, adventure, rpg..."
-                rows=3 style="resize: none;" required></textarea>
+                rows=3 style="resize: none;">{% for names in game.tags.names.all %}{{ names }}{{ ", " }}{% endfor %}</textarea>
             </div>
             <div class="form-group">
                 <label for="game-files" class="form-label">Archivos del juego</label>
-                <input class="form-control" type="file" id="game-files" name="game-files" accept=".zip" required>
+                <input class="form-control" type="file" id="game-files" name="game-files" accept=".zip">
             </div>
             <div class="form-group">
                 <label for="game-img" class="form-label">Imagen Juego</label>
                 <input class="form-control" type="file"  accept="image/*" name="game-img" id="game-img" onchange="loadFile(event)" style="width: 50;">
-                <img id="gimg-after-upload" width="200">
+                <img id="gimg-after-upload" width="200" src="/media/images/games/{{ game.id }}/thumbnail.png">
             </div>
             <div class="form-group">
                 <label for="nsfw" class="form-label">¿Para mayores de 18?</label>
-                <input type="checkbox" id="nsfw" name="nsfw">
+                <input type="checkbox" id="nsfw" name="nsfw" checked="{{ game.nsfw }}">
             </div>
             <div class="form-group">
                 <input type="submit" value="Guardar">

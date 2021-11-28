@@ -7,7 +7,7 @@ Jugar
 
 {% block content %}
 <div>
-    <a href="{% url 'editar_juego' game.id %}">Editar</a>
+    <a href="{% url 'editar_juego' game.id %}" class="btn btn-primary">Editar</a>
 </div>
 <div class="container game-container">
     <h1>{{ game.name }}</h1>
