@@ -25,7 +25,7 @@ class Comment(models.Model):
     user_id = ForeignKey(User, on_delete=models.CASCADE)
     game_id = ForeignKey(Game, on_delete=models.CASCADE)
     comment = models.CharField(max_length=51000)
-    date = models.DateTimeField(timezone.now().strftime("%d/%m/%Y - %H:%M"))
+    date = models.DateTimeField(default=timezone.now) #.strftime("%d/%m/%Y - %H:%M")
 
 
 class SocialMedia(models.Model):

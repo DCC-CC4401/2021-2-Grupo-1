@@ -1,5 +1,7 @@
+from os import path
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import Http404, HttpResponseNotFound, HttpResponseNotModified
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from juwuegowosApp.models import User, Game, Comment
@@ -9,15 +11,51 @@ from django.contrib.auth import authenticate, login,logout
 from django.core.files.storage import FileSystemStorage
 import zipfile
 import os, shutil
+from django.db.models import Q
+
+
 
 
 def testView(request):
     return render(request, "test.html")
 
+def search_results(request):
+    if request.method == "POST":
+        searched = request.POST["search"]
+        if searched == '': 
+            return HttpResponseRedirect("/")
+        #parsing the string to filter
+        #pasarlo todo a palabras separadas por espacios
+        game_name, tags, dev = parse(searched)
+        dev_user = User.objects.filter(username__contains=dev)
+        games = Game.objects.all()
+        if tags:
+            games = games.filter(tags__name__in=tags)
+        if game_name:
+            games = games.filter(name__contains=game_name)
+        if dev_user:
+            games = games.filter(developer__in=dev_user)
 
+        passed = {'searched' : searched, 'game_search': games}   
+        return render(request, "juwuegowosApp/search_results.html", passed)
+
+def parse(search):
+    word_list = search.replace(',',' ').replace(';',' ').split()
+    name_w = []
+    tags = []
+    dev = ''
+    for w in word_list:
+        if '#' in w:
+            tags += [w[1:]]
+        elif '@' in w:
+            dev = w[1:]
+        else:
+            name_w += [w]
+    name = ' '.join(name_w)
+    return name, tags, dev
+        
 def home(request):  # the index view
     return render(request, "juwuegowosApp/index.html")
-
 
 def register_user(request):
     if request.method == 'GET': #Si estamos cargando la página
@@ -42,6 +80,10 @@ def register_user(request):
         return HttpResponseRedirect('/login')
 
 
+        #Crear el nuevo usuario
+        user = User.objects.create_user(username=nombre, password=contraseña, email=mail, picture=imagen)
+        #Redireccionar la página /home
+        return HttpResponseRedirect('/login')
 
 def login_user(request):
     if request.method == 'GET':
@@ -63,25 +105,43 @@ def logout_user(request):
 
 
 def play_game(request, game_id):
-    game = Game.objects.filter(id=game_id)[0]
-    return render(request, "juwuegowosApp/game_page.html", {"game": game})
+    if request.method == "GET":
+        games = Game.objects.filter(id=game_id)
+        if len(games) > 0:
+            game = games[0]
+            return render(request, "juwuegowosApp/game_page.html", {"game": game})
+        raise Http404()
 
 
 def catalog(request):
+    limit = 6
     games = Game.objects.all()
-    return render(request, "juwuegowosApp/catalogo.html", {"games": games})
+    games_by_date = games.order_by('date')
+    games_by_random = games.order_by('?')
+    games_featured = games.filter(name__in=['Una Marraqueta','Wi-Fi for Wanderers', 'Troubleshooters'])
+    #games_featured = games
+    return render(request, "juwuegowosApp/catalogo.html", {
+        "games_featured": games_featured[:limit],
+        "games_by_date": games_by_date[:limit],
+        "games_by_random": games_by_random[:limit]
+    })
 
 
-def game_comments(request, game_id):
+def game_comments(request, game_id, page, order):
     if request.method == "GET":
-        comments = Comment.objects.filter(game_id=game_id)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
-    elif request.method == "POST":
+        game = Game.objects.filter(id=game_id)[0]
+        cond = "-" if order == 1 else ""
+        comments = Comment.objects.filter(game_id=game).order_by(f"{cond}date")[page*15:(page+1)*15]
+        if len(comments) > 0:
+            return render(request, "juwuegowosApp/comment_section.html", {"comments": comments, "game": game})
+        return HttpResponseNotModified()
+
+def post_comment(request, game_id):
+    if request.method == "POST":
         comment = request.POST["comment"]
-        new_comment = Comment(comment=comment, game_id=game_id, user_id=0) #obtener la id del usuario
+        game = Game.objects.filter(id=game_id)[0]
+        new_comment = Comment(comment=comment, game_id=game, user_id=request.user)
         new_comment.save()
-        comments = Comment.objects.filter(game_id=game_id)
-        return render(request, "juwuegowosApp/comment_section.html", {"comments": comments})
 
 def editar_juego(request, game_id):
     if request.method == "GET":
@@ -116,3 +176,18 @@ def editar_juego(request, game_id):
             return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})    
         return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
     
+
+        return HttpResponseNotModified()
+
+def view404(request, e):
+    return render(request, "404.html")
+
+def view500(request, e):
+    return render(request, "404.html")
+
+def view403(request, e):
+    return render(request, "404.html")
+
+def view400(request, e):
+    return render(request, "404.html")
+
