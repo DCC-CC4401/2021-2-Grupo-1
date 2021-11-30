@@ -11,6 +11,33 @@
     vertical-align: middle;
 }
 
+.nav-user-name {
+    color: #cad2d1;
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 1.75rem;
+}
+
+.dropdown-menu {
+    background-color: #252525;
+    /* color: #0bf; */
+}
+
+.dropdown-item {
+    /* font-weight: 600; */
+    font-size: 18px;
+    color: #ddd;
+}
+
+.dropdown-item:hover {
+    font-weight: 600;
+    color: #0bf;
+    background-color: #121212;
+    /* background-color: #0bf; */
+}
+
 .comment-box {
     overflow: hidden;
     resize: none;

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Cuenta
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1> Editar Cuenta </h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nombre_usuario">Nombre</label>
+            <input type="text" class="form-control" id="nombre_usuario" name="nombre" value="{{ user }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contraseña">Contraseña</label>
+            <input type="password" class="form-control" id="contraseña" name="contraseña">
+        </div>
+
+        <div class="form-group">
+            <label for="contraseña">Confirmar contraseña</label>
+            <input type="password" class="form-control" id="contraseña" name="conf-contraseña">
+        </div>
+
+        <div class="form-group">
+            <label for="mail">Mail</label>
+            <input type="email" class="form-control" id="mail" name="mail" value="{{ user.email }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="img-usuario">Imagen de usuario</label>
+            <input type="file" class="form-control" id="imagen" name="img-usuario" multiple="false">
+            <img id="uimg-after-upload" width="200" src="/media/images/profilePictures/{{ user.id }}.png">
+        </div>
+
+        <button type="submit" id="boton-editar-cuenta">Guardar cambios</button>
+    </form>
+</div>
+{% endblock %}

@@ -6,9 +6,11 @@ Jugar
 {% endblock %}
 
 {% block content %}
+{% if game.developer == user %}
 <div>
     <a href="{% url 'editar_juego' game.id %}" class="btn btn-primary">Editar</a>
 </div>
+{% endif %}
 <div class="container game-container">
     <h1>{{ game.name }}</h1>
     <iframe src="/media/games/{{ game.id }}/index.html" height="720" width="1280"></iframe>

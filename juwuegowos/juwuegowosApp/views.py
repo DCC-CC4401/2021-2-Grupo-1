@@ -1,4 +1,4 @@
-from os import path
+from os import error, path
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import Http404, HttpResponseNotFound, HttpResponseNotModified
@@ -146,10 +146,14 @@ def post_comment(request, game_id):
 def editar_juego(request, game_id):
     if request.method == "GET":
         game = Game.objects.filter(id=game_id)[0]
+        if request.user != game.developer:
+            raise Http404()
         form = Gameform(None, instance= game)
         return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
     elif request.method == "POST":
         game = Game.objects.filter(id=game_id)[0]
+        if request.user != game.developer:
+            raise Http404()
         form = Gameform(request.POST or None, instance= game)
         if form.is_valid():
             form.save()
@@ -175,19 +179,49 @@ def editar_juego(request, game_id):
                 fs.save(image_file_path, game_thmbnl)
             return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})    
         return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
+
+def user_games(request, user_id):
+    user = User.objects.filter(id=user_id)
+    if len(user) == 0 or request.user != user[0]:
+        raise Http404()
+    if request.method == "GET":
+        games = Game.objects.filter(developer=request.user)
+        passed = {'game_search': games}
+        return render(request, "juwuegowosApp/mis_juegos.html", passed)
+
+def edit_account(request, user_id):
+    user = User.objects.filter(id=user_id)
+    if len(user) == 0 or request.user != user[0]:
+        raise Http404()
+    if request.method == "GET":
+        return render(request, "juwuegowosApp/editar_datos.html")
+    elif request.method == "POST":
+        password_changed = False
+        err = {"password": "", "username": ""}
+        if len(request.POST["contraseña"]) >= 4 and request.POST["contraseña"] == request.POST["conf-contraseña"]:
+            user[0].set_password(request.POST["contraseña"])
+            password_changed = True
+        user[0].email = request.POST["mail"]
+        user[0].save()
+        if "img-usuario" in request.FILES:
+            imagen = request.FILES["img-usuario"]
+            fs = FileSystemStorage()
+            image_file_path = f"images/profilePictures/{user.id}.png"
+            fs.save(image_file_path, imagen)
+        if password_changed:
+            return HttpResponseRedirect('/login')
+        return render(request, "juwuegowosApp/editar_datos.html", err)
     
 
-        return HttpResponseNotModified()
-
 def view404(request, e):
-    return render(request, "404.html")
+    raise Http404()
 
 def view500(request, e):
-    return render(request, "404.html")
+    raise Http404()
 
 def view403(request, e):
-    return render(request, "404.html")
+    raise Http404()
 
 def view400(request, e):
-    return render(request, "404.html")
+    raise Http404()
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mis Juegos
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Mis Juegos</h1>
+    <div class="row">
+    {% for game in game_search %}
+        <div class = "col-md-4 col-lg-4 col-12">
+            {% include "componentes/game_card_edit.html" %}
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

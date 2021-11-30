@@ -1,0 +1,31 @@
+
+<div class = "card text-white bg-dark game-card">
+
+    <div class="container-over">
+    <a href="/editar/{{ game.id }}">
+        <div class="overflow-container">
+            <img class="card-img-top game-thumbnail {% if game.nsfw %}nsfw{% endif %}" src="/media/images/games/{{ game.id }}/thumbnail.png">
+        </div>
+        {% if game.nsfw %}<div class="nsfw-text text-white">Poner cursor encima para ver</div>{% endif %}
+    </a>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ game.name }}
+            {% if game.nsfw %}
+                <span class="badge bg-danger rounded-pill nsfw-badge">18+</span>
+            {% endif %}
+        </h5>
+
+        <p class="card-text game-text">{{ game.description }}</p>
+    </div>
+
+    <div class="card-footer">
+         <div>
+            <a href="/editar/{{ game.id }}/" class="btn btn-primary">Editar</a>
+        </div>
+    </div>
+
+</div>
+

@@ -18,6 +18,8 @@ urlpatterns = [
     path("search_results", views.search_results, name="search_results"),
     path("comments/<int:game_id>/<int:page>/<int:order>/", view=views.game_comments, name="comments"),
     path("comments/<int:game_id>/", view=views.post_comment, name="post_comment"),
+    path("u/<int:user_id>/datos", view=views.edit_account, name="edit_account"),
+    path("u/<int:user_id>/juegos", view=views.user_games, name="user_games"),
     url(r'^media/(?P<path>.*)$', serve,{'document_root': MEDIA_ROOT}), 
     url(r'^static/(?P<path>.*)$', serve,{'document_root': STATIC_ROOT}), 
 ]

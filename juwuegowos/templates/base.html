@@ -6,11 +6,12 @@
 	<title>
 		Vapor - {% block title %} {% endblock %}
 	</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/malware.js"></script>
 </head>
 
@@ -48,32 +49,31 @@
 
                     {% if user.is_authenticated %}
 
-                        <li class="nav-item" style="margin-right:15px;">
-                            <form method="get" action="/upload-game" style="padding:7px;">
-                                <button type="submit" class="btn btn-secondary" >
-                                    <span class="material-icons md-36">
-                                        upload
-                                    </span>
-                                </button>
-                            </form>
-                        </li>
+                    <li class="nav-item" style="margin-right:15px;">
+                        <form method="get" action="/upload-game" style="padding:7px;">
+                            <button type="submit" class="btn btn-secondary" >
+                                <span class="material-icons md-36">
+                                    upload
+                                </span>
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="user-menu" class="nav-link dropdown-toggle nav-user-name" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="user-menu" data-bs-popper="none">
+                            <li><a class="dropdown-item" href="/u/{{ user.id }}/datos">Editar Cuenta</a></li>
+                            <li><a class="dropdown-item" href="/u/{{ user.id }}/juegos">Mis Juegos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Salir</a></li>
+                        </ul>
+                    </li>
 
-
-                        <li class="navbar-text">
-                            <h3>
-                                {{ user.username }}
-                            </h3>
-                        </li>
-
-                        <li class="nav-item" style="margin-left: 1rem">
-                            <img class="rounded justify-content-center" src="/media/images/profilePictures/{{ user.id }}.png" width="48" height="48">
-                        </li>
-
-                         <li class="nav-item">
-                            <form method="get" action="/logout" style="padding:7px;">
-                                <button class="btn btn-primary" type="submit">Salir</button>
-                            </form>
-                        </li>
+                    <li class="nav-item" style="margin-left: 1rem">
+                        <img class="rounded justify-content-center" src="/media/images/profilePictures/{{ user.id }}.png" width="48" height="48">
+                    </li>
+                        
 
                     {% else %}
                         <li class="nav-item">
@@ -87,9 +87,7 @@
                             </form>
                         </li>
                     {% endif %}
-
 				</ul>
-
 			</div>
 		</div>
 	</nav>
