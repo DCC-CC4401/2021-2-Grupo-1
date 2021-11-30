@@ -9,35 +9,35 @@ Subir juegos
         <h1>Subir Juego</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="game-name" class="form-label">
                     Nombre del Juego:
                 </label>
-                <input type="text" class="form-control" id="game-name" name="name" 
+                <input type="text" class="form-control" id="game-name" name="game-name" 
                 placeholder="Ingresa el nombre del juego" required> 
             </div>
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="game-desc" class="form-label">Descripcion del juego:</label>
                 <textarea class="form-control" id="game-desc" name="game-desc" placeholder="Escribe una breve descripción de tu juego."
                 rows=3 style="resize: none;" required></textarea>
             </div>
-            <div class="form-group">
-                <label for="game-tags" class="form-label">Tags: :</label>
+            <div class="form-group container">
+                <label for="game-tags" class="form-label">Tags:</label>
                 <textarea class="form-control" id="game-tags" name="game-tags" placeholder="tags: action, adventure, rpg..."
                 rows=3 style="resize: none;" required></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="game-files" class="form-label">Archivos del juego</label>
                 <input class="form-control" type="file" id="game-files" name="game-files" accept=".zip" required>
             </div>
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="game-img" class="form-label">Imagen Juego</label>
                 <input class="form-control" type="file"  accept="image/*" name="game-img" id="game-img" onchange="loadFile(event)" style="width: 50;">
                 <div class="container">
                     <img id="gimg-after-upload" width="200">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group container">
                 <label for="nsfw" class="form-label">¿Para mayores de 18?</label>
                 <input type="checkbox" id="nsfw" name="nsfw">
             </div>

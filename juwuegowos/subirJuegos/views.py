@@ -41,7 +41,7 @@ def subir_juegos(request):
         fs.save(image_file_path, game_thmbnl)
 
 
-        return HttpResponseRedirect("/") 
+        return HttpResponseRedirect(f"/u/{request.user.id}/juegos") 
     else:    
         return render(request, 'template_subirJuegos/subir_juegos.html')    
     
