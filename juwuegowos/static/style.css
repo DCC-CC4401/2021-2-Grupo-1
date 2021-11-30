@@ -38,6 +38,10 @@
     /* background-color: #0bf; */
 }
 
+.form-label {
+    font-size: 20px;
+}
+
 .comment-box {
     overflow: hidden;
     resize: none;

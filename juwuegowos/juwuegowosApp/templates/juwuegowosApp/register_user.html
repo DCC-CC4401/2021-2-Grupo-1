@@ -10,27 +10,28 @@ Registro
         <h1> Registro </h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="nombre_usuario">Nombre</label>
+            <div class="form-group container">
+                <label class="form-label" for="nombre_usuario">Nombre</label>
                 <input type="text" class="form-control" id=nombre_usuario name="nombre" required>
             </div>
     
-            <div class="form-group">
-                <label for="contraseña">Contraseña</label>
+            <div class="form-group container">
+                <label class="form-label" for="contraseña">Contraseña</label>
                 <input type="password" class="form-control" id="contraseña" name="contraseña" required>
             </div>
     
-            <div class="form-group">
-                <label for="mail">Mail</label>
+            <div class="form-group container">
+                <label class="form-label" for="mail">Mail</label>
                 <input type="email" class="form-control" id="mail" name="mail" required>
             </div>
             
-            <div class="form-group">
-                <label for="img-usuario">Imagen de usuario</label>
+            <div class="form-group container">
+                <label class="form-label" for="img-usuario">Imagen de usuario</label>
                 <input type="file" class="form-control" id="imagen" name="img-usuario" multiple="false">
             </div>
-    
-            <button type="submit" id="boton-crear-usuario">Crear usuario</button>
+            <div class="container">
+                <button type="submit" class="btn btn-primary" id="boton-crear-usuario">Crear usuario</button>
+            </div>
         </form>
     </div>
  </body>
