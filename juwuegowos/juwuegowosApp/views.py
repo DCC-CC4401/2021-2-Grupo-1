@@ -116,7 +116,7 @@ def play_game(request, game_id):
 def catalog(request):
     limit = 6
     games = Game.objects.all()
-    games_by_date = games.order_by('date')
+    games_by_date = games.order_by('date')[::-1]
     games_by_random = games.order_by('?')
     games_featured = games.filter(name__in=['Una Marraqueta','Wi-Fi for Wanderers', 'Troubleshooters'])
     #games_featured = games
@@ -142,6 +142,7 @@ def post_comment(request, game_id):
         game = Game.objects.filter(id=game_id)[0]
         new_comment = Comment(comment=comment, game_id=game, user_id=request.user)
         new_comment.save()
+        return HttpResponseNotModified()
 
 def editar_juego(request, game_id):
     if request.method == "GET":
