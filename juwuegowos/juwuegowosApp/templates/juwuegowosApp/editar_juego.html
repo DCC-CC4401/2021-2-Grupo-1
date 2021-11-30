@@ -7,13 +7,13 @@ Editar juegos
 {% block content %}
     <div class="container">
         <h1>Editar Juego</h1>
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="game-edit-form">
             {% csrf_token %}
             <div class="form-group container">
                 <label class="form-label" for="game-name" class="form-label">
                     Nombre del Juego:
                 </label>
-                <input type="text" class="form-control" id="game-name" name="game-name" 
+                <input type="text" class="form-control" id="game-name" name="name" 
                 required value="{{ game.name }}"> 
             </div>
             <div class="form-group container">
@@ -22,9 +22,9 @@ Editar juegos
                 rows=3 style="resize: none;" required>{{ game.description }}</textarea>
             </div>
             <div class="form-group container">
-                <label class="form-label" for="game-tags" class="form-label">Tags: :</label>
+                <label class="form-label" for="game-tags" class="form-label">Tags:</label>
                 <textarea class="form-control" id="game-tags" name="tags" placeholder="tags: action, adventure, rpg..."
-                rows=3 style="resize: none;">{% for names in game.tags.names.all %}{{ names }}{{ ", " }}{% endfor %}</textarea>
+                rows=3 form="game-edit-form" style="resize: none;">{% for names in game.tags.names.all %}{{ names }}{{ ", " }}{% endfor %}</textarea>
             </div>
             <div class="form-group container">
                 <label class="form-label" for="game-files" class="form-label">Archivos del juego</label>

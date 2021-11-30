@@ -9,16 +9,16 @@ from os import remove, mkdir
 
 def subir_juegos(request):
     if request.method == "POST":
-        game_name = request.POST["game-name"]
-        game_desc = request.POST["game-desc"]
-        game_tags = request.POST["game-tags"]
+        game_name = request.POST["name"]
+        game_desc = request.POST["description"]
+        game_tags = request.POST["tags"]
         game_thmbnl = request.FILES['game-img']
         is_nsfw = request.POST.get("nsfw", False)=="on"
         dev = request.user
         #falta agregar los game_files, no se donde iria eso.
         game = Game(name=game_name, description=game_desc, nsfw=is_nsfw, developer=dev)
         game.save() 
-        game.tags.add(game_tags) 
+        game.tags.add(*map(lambda x: x.strip(), game_tags.split(","))) 
         game.save() 
 
         #print(game_files)

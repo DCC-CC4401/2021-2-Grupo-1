@@ -144,8 +144,10 @@ def post_comment(request, game_id):
         new_comment.save()
 
 def editar_juego(request, game_id):
+    print("uwu")
+    print(request.POST)
     if request.method == "GET":
-        game = Game.objects.filter(id=game_id)[0]
+        game: Game = Game.objects.filter(id=game_id)[0]
         if request.user != game.developer:
             raise Http404()
         form = Gameform(None, instance= game)
@@ -156,7 +158,9 @@ def editar_juego(request, game_id):
             raise Http404()
         form = Gameform(request.POST or None, instance= game)
         if form.is_valid():
+            #game.tags.set(*map(lambda x: x.strip(), request.POST["tags"].split(",")), clear=True)
             form.save()
+            
             if "game-files" in request.FILES:
                 game_files = request.FILES["game-files"]
                 fs = FileSystemStorage()
@@ -176,6 +180,7 @@ def editar_juego(request, game_id):
                 game_thmbnl = request.FILES["game-img"]
                 fs = FileSystemStorage()
                 image_file_path = f"images/games/{game.id}/thumbnail.png"
+                fs.delete(image_file_path)
                 fs.save(image_file_path, game_thmbnl)
             return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})    
         return render(request, "juwuegowosApp/editar_juego.html", {"game": game, 'form': form})
@@ -198,16 +203,18 @@ def edit_account(request, user_id):
     elif request.method == "POST":
         password_changed = False
         err = {"password": "", "username": ""}
+        if "img-usuario" in request.FILES:
+            imagen = request.FILES["img-usuario"]
+            fs = FileSystemStorage()
+            image_file_path = f"images/profilePictures/{user[0].id}.png"
+            fs.delete(image_file_path)
+            fs.save(image_file_path, imagen)
         if len(request.POST["contraseña"]) >= 4 and request.POST["contraseña"] == request.POST["conf-contraseña"]:
             user[0].set_password(request.POST["contraseña"])
             password_changed = True
         user[0].email = request.POST["mail"]
         user[0].save()
-        if "img-usuario" in request.FILES:
-            imagen = request.FILES["img-usuario"]
-            fs = FileSystemStorage()
-            image_file_path = f"images/profilePictures/{user.id}.png"
-            fs.save(image_file_path, imagen)
+        
         if password_changed:
             return HttpResponseRedirect('/login')
         return render(request, "juwuegowosApp/editar_datos.html", err)
